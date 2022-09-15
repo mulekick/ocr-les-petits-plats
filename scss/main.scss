@@ -17,6 +17,22 @@ span.small {
     @include span($size: 12.5px, $weight: 300);
 }
 
+span.icon {
+    // box properties
+    @include box($width: 50px, $height: 50px, $radius: 0 $radius_default $radius_default 0);
+    // content layout management
+    @include flex;
+}
+
+// ---------- INPUTS ------------
+
+input {
+    // box properties
+    @include box($height: 50px, $radius: $radius_default 0 0 $radius_default);
+    // additional properties
+    border: 0px;
+}
+
 // ------------ BOX -------------
 
 .box {
@@ -55,71 +71,124 @@ main {
     flex-wrap: wrap;
     margin: 0 100px;
     // stop viewport shrinking
-    min-width: 1410px;
-    // recipes thumbnails
-    > article {
-        // box properties
-        @include box($width: 450px, $padding: unset);
+    min-width: 1520px;
+    // text search field
+    > input:first-of-type {
         // additional properties
-        margin: 25px calc((100% - 1350px) / 2) 25px 0;
-        overflow: hidden;
-        // recipe image
-        > div:nth-of-type(1) {
-            // box properties
-            @include box($width: 450px, $height: 225px, $backcolor: $color_recipe_1, $radius: 0px);
-        }
-        // recipe details
-        > div:nth-of-type(2) {
-            // box properties
-            // @include box($width: 450px, $height: 225px, $backcolor: $color_recipe_2, $radius: 0px);
-            @include box($width: 100%, $height: 235px, $padding: 20px 20px, $backcolor: $color_recipe_2, $radius: 0px);
-            // content layout management
-            @include flex($direction: row);
+        width: calc(100% - 50px);
+        background-color: $color_recipe_2;
+    }
+    > span.icon {
+        // additional properties
+        background-color: $color_recipe_2;
+    }
+    > div.tags {
+        // box properties
+        @include box($width: 100%, $height: 70px, $padding: 10px 0px);
+        // content layout management
+        @include flex($direction: row, $align: center, $justify: flex-start);
+        // additional properties
+        margin: 25px 0 0 0;
+        // tags selectors
+        > input, > span {
             // additional properties
-            flex-wrap: wrap;
-            align-content: space-around;
-            // common properties
-            > * {
-                // box properties
-                @include box($padding: 0px);
-                // content layout management
-                @include flex($align: flex-start);
+            color: white;
+            &::placeholder {
+                color: white;
             }
-            > h2 {
-                // overridings
-                width: 75%;
-                height: 45px;
-                // additional properties
-                margin-block: unset;
-                margin-inline: unset;
-            }
-            > i {
-                // overridings
-                width: 5%;
-                height: 45px;
-            }
-            > span:nth-of-type(1) {
-                // overridings
-                width: 20%;
-                height: 45px;
-                align-items: center;
-            }
-            > div:nth-of-type(1) {
-                // overridings
-                width: 50%;
-                height: 175px;
-                justify-content: flex-start;
-            }
-            > span:nth-of-type(2) {
-                // overridings
-                width: 50%;
-                height: 175px;      
-                justify-content: flex-start;     
-            }
+        }
+        > input:nth-of-type(1), > span:nth-of-type(1) {
+            // additional properties
+            background-color: $color_search_1;
+        }
+        > span:nth-of-type(1) {
+            // additional properties
+            margin-right: 20px;
+        }
+        > input:nth-of-type(2), > span:nth-of-type(2) {
+            // additional properties
+            background-color: $color_search_2;
+        }
+        > span:nth-of-type(2) {
+            // additional properties
+            margin-right: 20px;            
+        }
+        > input:nth-of-type(3), > span:nth-of-type(3) {
+            // additional properties
+            background-color: $color_search_3;
         }
     }
-    // keep the thumbnail layout left aligned whatsoever
-    > article:nth-of-type(3n) {
-        margin-right: 0;
+    > div.recipes {
+        // content layout management
+        @include flex($direction: row, $align: center, $justify: flex-start);
+        // additional properties
+        width: 100%;
+        flex-wrap: wrap;
+        // recipes thumbnails
+        > article {
+            // box properties
+            @include box($width: 475px, $padding: unset);
+            // additional properties
+            margin: 25px calc((100% - 1425px) / 2) 25px 0;
+            overflow: hidden;
+            // recipe image
+            > div:nth-of-type(1) {
+                // box properties
+                @include box($width: 475px, $height: 225px, $backcolor: $color_recipe_1, $radius: 0px);
+            }
+            // recipe details
+            > div:nth-of-type(2) {
+                // box properties
+                @include box($width: 100%, $height: 235px, $padding: 20px 20px, $backcolor: $color_recipe_2, $radius: 0px);
+                // content layout management
+                @include flex($direction: row);
+                // additional properties
+                flex-wrap: wrap;
+                align-content: space-around;
+                // common properties
+                > * {
+                    // box properties
+                    @include box($padding: 0px);
+                    // content layout management
+                    @include flex($align: flex-start);
+                }
+                > h2 {
+                    // overridings
+                    width: 75%;
+                    height: 45px;
+                    // additional properties
+                    margin-block: unset;
+                    margin-inline: unset;
+                }
+                > i {
+                    // overridings
+                    width: 5%;
+                    height: 45px;
+                }
+                > span:nth-of-type(1) {
+                    // overridings
+                    width: 20%;
+                    height: 45px;
+                    align-items: center;
+                }
+                > div:nth-of-type(1) {
+                    // overridings
+                    width: 50%;
+                    height: 175px;
+                    justify-content: flex-start;
+                }
+                > span:nth-of-type(2) {
+                    // overridings
+                    width: 50%;
+                    height: 175px;      
+                    justify-content: flex-start;     
+                }
+            }
+        }
+        // keep the thumbnail layout left aligned whatsoever
+        > article:nth-of-type(3n) {
+            margin-right: 0;
+        }
+
     }
 }
