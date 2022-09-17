@@ -8,7 +8,9 @@ try {
 
     const
         // create DOM element for text search
-        textSearch = inputFactory(`search`, `recipes-search`, `Rechercher une recette`, `magnifying-glass`),
+        textSearch = inputFactory(`search`, `recipes-search`, `Rechercher une recette`, `magnifying-glass`);
+
+    /*
         // create DOM elements for tag searches
         ingredientsSearch = inputFactory(`tag`, `ingredients-tag`, `Ingédients`, `chevron-down`),
         appliancesSearch = inputFactory(`tag`, `appliances-tag`, `Appareils`, `chevron-down`),
@@ -26,13 +28,16 @@ try {
     ingredientsSearch.subscribe(recipeFinder);
     appliancesSearch.subscribe(recipeFinder);
     ustensilsSearch.subscribe(recipeFinder);
+    */
 
     // append text search
     document.querySelector(`.tags`).before(...textSearch.get());
 
+    /*
     // append tag search
     [ ustensilsSearch, appliancesSearch, ingredientsSearch ]
         .forEach(x => document.querySelector(`.tags`).append(...x.get()));
+    */
 
 } catch (err) {
     // write to stderr

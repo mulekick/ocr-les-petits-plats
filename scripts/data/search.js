@@ -19,7 +19,7 @@ const
                 console.log(`${ this.name }: search text changed to ${ element.value } in ${ element.id }`);
                 break;
             case `tagValueChange` :
-                console.log(`${ this.name }: searcg tag changed to ${ element.value } in ${ element.id }`);
+                console.log(`${ this.name }: search tag changed to ${ element.value } in ${ element.id }`);
                 break;
             default :
                 throw new Error(`${ this.name }: unhandled notification type`);

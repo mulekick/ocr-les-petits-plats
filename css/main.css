@@ -3,6 +3,7 @@ span.large, h2, i {
   margin: 5px 0 5px 0;
   font-size: 20px;
   font-weight: 500;
+  color: black;
   font-family: "Roboto", sans-serif;
 }
 
@@ -10,6 +11,7 @@ span.small {
   margin: 5px 0 5px 0;
   font-size: 12.5px;
   font-weight: 300;
+  color: black;
   font-family: "Roboto", sans-serif;
 }
 
@@ -92,30 +94,129 @@ main > div.tags {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 25px 0 0 0;
+  /*
+  // tags selectors
+  > input, > span {
+      // additional properties
+      color: white;
+      &::placeholder {
+          color: white;
+      }
+  }
+  > input:nth-of-type(1), > span:nth-of-type(1) {
+      // additional properties
+      background-color: $color_search_1;
+  }
+  > span:nth-of-type(1) {
+      // additional properties
+      margin-right: 20px;
+  }
+  > input:nth-of-type(2), > span:nth-of-type(2) {
+      // additional properties
+      background-color: $color_search_2;
+  }
+  > span:nth-of-type(2) {
+      // additional properties
+      margin-right: 20px;            
+  }
+  > input:nth-of-type(3), > span:nth-of-type(3) {
+      // additional properties
+      background-color: $color_search_3;
+  }
+  */
+}
+main > div.tags > div {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+main > div.tags > div > div {
+  width: 100%;
+  height: initial;
+  padding: 0;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin: 25px 0 0 0;
+  flex-wrap: wrap;
 }
-main > div.tags > input, main > div.tags > span {
+main > div.tags > div > div > input {
+  width: calc(100% - 50px);
   color: white;
 }
-main > div.tags > input::placeholder, main > div.tags > span::placeholder {
+main > div.tags > div > div > input::placeholder {
   color: white;
 }
-main > div.tags > input:nth-of-type(1), main > div.tags > span:nth-of-type(1) {
+main > div.tags > div > div i {
+  color: white;
+}
+main > div.tags > div > ul {
+  width: 480px;
+  height: initial;
+  padding: 0;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0px;
+}
+main > div.tags > div > ul > li {
+  width: 160px;
+  height: 32.5px;
+  padding: 10px 10px;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 300;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+main > div.tags > div:nth-of-type(1) {
+  width: initial;
+  height: initial;
+  padding: 0;
   background-color: #3481f5;
-}
-main > div.tags > span:nth-of-type(1) {
+  border-radius: 7.5px;
+  box-sizing: border-box;
   margin-right: 20px;
 }
-main > div.tags > input:nth-of-type(2), main > div.tags > span:nth-of-type(2) {
+main > div.tags > div:nth-of-type(2) {
+  width: initial;
+  height: initial;
+  padding: 0;
   background-color: #68d9a5;
-}
-main > div.tags > span:nth-of-type(2) {
+  border-radius: 7.5px;
+  box-sizing: border-box;
   margin-right: 20px;
 }
-main > div.tags > input:nth-of-type(3), main > div.tags > span:nth-of-type(3) {
+main > div.tags > div:nth-of-type(3) {
+  width: initial;
+  height: initial;
+  padding: 0;
   background-color: #eb6552;
+  border-radius: 7.5px;
+  box-sizing: border-box;
 }
 main > div.recipes {
   display: flex;
