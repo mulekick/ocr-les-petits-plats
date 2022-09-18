@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 /* eslint-disable class-methods-use-this */
 
 // import modules
