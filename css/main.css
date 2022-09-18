@@ -51,6 +51,203 @@ input {
   justify-content: space-around;
 }
 
+div.tags {
+  width: 100%;
+  height: 70px;
+  padding: 10px 0px;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 25px 0 0 0;
+}
+div.tags > div {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 20px;
+}
+div.tags > div > div {
+  width: 100%;
+  height: initial;
+  padding: 0;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+div.tags > div > div > input {
+  width: calc(100% - 50px);
+  color: white;
+}
+div.tags > div > div > input::placeholder {
+  color: white;
+}
+div.tags > div > div i {
+  color: white;
+}
+div.tags > div:nth-of-type(1) {
+  width: initial;
+  height: initial;
+  padding: 0;
+  background-color: #3481f5;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+}
+div.tags > div:nth-of-type(2) {
+  width: initial;
+  height: initial;
+  padding: 0;
+  background-color: #68d9a5;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+}
+div.tags > div:nth-of-type(3) {
+  width: initial;
+  height: initial;
+  padding: 0;
+  background-color: #eb6552;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+}
+
+.taglist {
+  width: initial;
+  height: initial;
+  padding: 0;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0px;
+}
+.taglist > li {
+  width: 160px;
+  height: 32.5px;
+  padding: 10px 10px;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 300;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.taglist-cols-1 {
+  width: 250px;
+}
+
+.taglist-cols-2 {
+  width: 320px;
+}
+
+.taglist-cols-3 {
+  width: 480px;
+}
+
+div.recipes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+}
+div.recipes > article {
+  width: 475px;
+  height: initial;
+  padding: unset;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  margin: 25px calc((100% - 1425px) / 2) 25px 0;
+  overflow: hidden;
+}
+div.recipes > article > div:nth-of-type(1) {
+  width: 475px;
+  height: 225px;
+  padding: 10px 10px;
+  background-color: #c8bebd;
+  border-radius: 0px;
+  box-sizing: border-box;
+}
+div.recipes > article > div:nth-of-type(2) {
+  width: 100%;
+  height: 235px;
+  padding: 20px 20px;
+  background-color: #e7e7e7;
+  border-radius: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+div.recipes > article > div:nth-of-type(2) > * {
+  width: initial;
+  height: initial;
+  padding: 0px;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+div.recipes > article > div:nth-of-type(2) > h2 {
+  width: 75%;
+  height: 45px;
+  margin-block: unset;
+  margin-inline: unset;
+}
+div.recipes > article > div:nth-of-type(2) > i {
+  width: 5%;
+  height: 45px;
+}
+div.recipes > article > div:nth-of-type(2) > span:nth-of-type(1) {
+  width: 20%;
+  height: 45px;
+  align-items: center;
+}
+div.recipes > article > div:nth-of-type(2) > div:nth-of-type(1) {
+  width: 50%;
+  height: 175px;
+  justify-content: flex-start;
+}
+div.recipes > article > div:nth-of-type(2) > span:nth-of-type(2) {
+  width: 50%;
+  height: 175px;
+  justify-content: flex-start;
+}
+div.recipes > article:nth-of-type(3n) {
+  margin-right: 0;
+}
+
 body {
   width: 100%;
   margin: 0px;
@@ -84,217 +281,4 @@ main > input:first-of-type {
 }
 main > span.icon {
   background-color: #e7e7e7;
-}
-main > div.tags {
-  width: 100%;
-  height: 70px;
-  padding: 10px 0px;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 25px 0 0 0;
-  /*
-  // tags selectors
-  > input, > span {
-      // additional properties
-      color: white;
-      &::placeholder {
-          color: white;
-      }
-  }
-  > input:nth-of-type(1), > span:nth-of-type(1) {
-      // additional properties
-      background-color: $color_search_1;
-  }
-  > span:nth-of-type(1) {
-      // additional properties
-      margin-right: 20px;
-  }
-  > input:nth-of-type(2), > span:nth-of-type(2) {
-      // additional properties
-      background-color: $color_search_2;
-  }
-  > span:nth-of-type(2) {
-      // additional properties
-      margin-right: 20px;            
-  }
-  > input:nth-of-type(3), > span:nth-of-type(3) {
-      // additional properties
-      background-color: $color_search_3;
-  }
-  */
-}
-main > div.tags > div {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-main > div.tags > div > div {
-  width: 100%;
-  height: initial;
-  padding: 0;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-main > div.tags > div > div > input {
-  width: calc(100% - 50px);
-  color: white;
-}
-main > div.tags > div > div > input::placeholder {
-  color: white;
-}
-main > div.tags > div > div i {
-  color: white;
-}
-main > div.tags > div > ul {
-  width: 480px;
-  height: initial;
-  padding: 0;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0px;
-}
-main > div.tags > div > ul > li {
-  width: 160px;
-  height: 32.5px;
-  padding: 10px 10px;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  margin: 0;
-  font-size: 15.5px;
-  font-weight: 300;
-  color: white;
-  font-family: "Roboto", sans-serif;
-}
-main > div.tags > div:nth-of-type(1) {
-  width: initial;
-  height: initial;
-  padding: 0;
-  background-color: #3481f5;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  margin-right: 20px;
-}
-main > div.tags > div:nth-of-type(2) {
-  width: initial;
-  height: initial;
-  padding: 0;
-  background-color: #68d9a5;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  margin-right: 20px;
-}
-main > div.tags > div:nth-of-type(3) {
-  width: initial;
-  height: initial;
-  padding: 0;
-  background-color: #eb6552;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-}
-main > div.recipes {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  flex-wrap: wrap;
-}
-main > div.recipes > article {
-  width: 475px;
-  height: initial;
-  padding: unset;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  margin: 25px calc((100% - 1425px) / 2) 25px 0;
-  overflow: hidden;
-}
-main > div.recipes > article > div:nth-of-type(1) {
-  width: 475px;
-  height: 225px;
-  padding: 10px 10px;
-  background-color: #c8bebd;
-  border-radius: 0px;
-  box-sizing: border-box;
-}
-main > div.recipes > article > div:nth-of-type(2) {
-  width: 100%;
-  height: 235px;
-  padding: 20px 20px;
-  background-color: #e7e7e7;
-  border-radius: 0px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-content: space-around;
-}
-main > div.recipes > article > div:nth-of-type(2) > * {
-  width: initial;
-  height: initial;
-  padding: 0px;
-  background-color: initial;
-  border-radius: 7.5px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-}
-main > div.recipes > article > div:nth-of-type(2) > h2 {
-  width: 75%;
-  height: 45px;
-  margin-block: unset;
-  margin-inline: unset;
-}
-main > div.recipes > article > div:nth-of-type(2) > i {
-  width: 5%;
-  height: 45px;
-}
-main > div.recipes > article > div:nth-of-type(2) > span:nth-of-type(1) {
-  width: 20%;
-  height: 45px;
-  align-items: center;
-}
-main > div.recipes > article > div:nth-of-type(2) > div:nth-of-type(1) {
-  width: 50%;
-  height: 175px;
-  justify-content: flex-start;
-}
-main > div.recipes > article > div:nth-of-type(2) > span:nth-of-type(2) {
-  width: 50%;
-  height: 175px;
-  justify-content: flex-start;
-}
-main > div.recipes > article:nth-of-type(3n) {
-  margin-right: 0;
 }

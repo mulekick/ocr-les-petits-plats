@@ -42,6 +42,177 @@ input {
     @include flex;
 }
 
+// --------- TAGS LIST ----------
+
+// tags selectors
+div.tags {
+    // box properties
+    @include box($width: 100%, $height: 70px, $padding: 10px 0px);
+    // content layout management
+    @include flex($direction: row, $align: flex-start, $justify: flex-start);
+    // additional properties
+    flex-wrap: wrap;
+    margin: 25px 0 0 0;
+    // wrapper div
+    > div {
+        // positioning
+        position: relative;
+        z-index: 10;
+        // content layout management
+        @include flex;
+        // additional properties
+        margin-right: 20px;
+        // input
+        > div {
+            // box properties
+            @include box($width: 100%, $padding: 0);
+            // content layout management
+            @include flex($direction: row, $align: center, $justify: flex-start);
+            // additional properties
+            flex-wrap: wrap;
+            > input {
+                // additional properties
+                width: calc(100% - 50px);
+                color: white;
+                // pseudo selectors
+                &::placeholder {
+                    color: white;
+                }
+            }
+            i {
+                // additional properties
+                color: white;
+            }
+        }
+    }
+    
+    > div:nth-of-type(1) {
+        // box properties
+        @include box($backcolor: $color_search_1, $padding: 0);
+    }
+    
+    > div:nth-of-type(2) {
+        // box properties
+        @include box($backcolor: $color_search_2, $padding: 0);
+    }
+    
+    > div:nth-of-type(3) {
+        // box properties
+        @include box($backcolor: $color_search_3, $padding: 0);
+    }
+}
+
+.taglist {
+    // box properties
+    @include box($padding: 0);
+    // content layout management
+    @include flex($direction: row, $align: flex-start, $justify: flex-start);
+    // additional properties
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0px;
+    > li {    
+        // box properties
+        @include box($width: $tag_col_width, $height: 32.5px);
+        // content layout management
+        @include flex($align: flex-start);
+        // font
+        @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white)
+    }
+}
+
+.taglist-cols-1 {
+    // additional properties
+    // width: $tag_col_width * 1;
+    width: 250px;
+}
+
+.taglist-cols-2 {
+    // additional properties
+    width: $tag_col_width * 2;
+}
+
+.taglist-cols-3 {
+    // additional properties
+    width: $tag_col_width * 3;
+}
+
+// ------- RECIPES LIST ---------
+
+div.recipes {
+    // content layout management
+    @include flex($direction: row, $align: center, $justify: flex-start);
+    // additional properties
+    width: 100%;
+    flex-wrap: wrap;
+    // recipes thumbnails
+    > article {
+        // box properties
+        @include box($width: 475px, $padding: unset);
+        // additional properties
+        margin: 25px calc((100% - 1425px) / 2) 25px 0;
+        overflow: hidden;
+        // recipe image
+        > div:nth-of-type(1) {
+            // box properties
+            @include box($width: 475px, $height: 225px, $backcolor: $color_recipe_1, $radius: 0px);
+        }
+        // recipe details
+        > div:nth-of-type(2) {
+            // box properties
+            @include box($width: 100%, $height: 235px, $padding: 20px 20px, $backcolor: $color_recipe_2, $radius: 0px);
+            // content layout management
+            @include flex($direction: row);
+            // additional properties
+            flex-wrap: wrap;
+            align-content: space-around;
+            // common properties
+            > * {
+                // box properties
+                @include box($padding: 0px);
+                // content layout management
+                @include flex($align: flex-start);
+            }
+            > h2 {
+                // overridings
+                width: 75%;
+                height: 45px;
+                // additional properties
+                margin-block: unset;
+                margin-inline: unset;
+            }
+            > i {
+                // overridings
+                width: 5%;
+                height: 45px;
+            }
+            > span:nth-of-type(1) {
+                // overridings
+                width: 20%;
+                height: 45px;
+                align-items: center;
+            }
+            > div:nth-of-type(1) {
+                // overridings
+                width: 50%;
+                height: 175px;
+                justify-content: flex-start;
+            }
+            > span:nth-of-type(2) {
+                // overridings
+                width: 50%;
+                height: 175px;      
+                justify-content: flex-start;     
+            }
+        }
+    }
+    // keep the thumbnail layout left aligned whatsoever
+    > article:nth-of-type(3n) {
+        margin-right: 0;
+    }
+
+}
+
 // ------------ PAGE ------------
 
 body {
@@ -82,193 +253,5 @@ main {
     > span.icon {
         // additional properties
         background-color: $color_recipe_2;
-    }
-
-    // tags selectors
-    > div.tags {
-        // box properties
-        @include box($width: 100%, $height: 70px, $padding: 10px 0px);
-        // content layout management
-        @include flex($direction: row, $align: flex-start, $justify: flex-start);
-        // additional properties
-        flex-wrap: wrap;
-        margin: 25px 0 0 0;
-        // wrapper div
-        > div {
-            // positioning
-            position: relative;
-            z-index: 10;
-            // content layout management
-            @include flex;
-            // input
-            > div {
-                // box properties
-                @include box($width: 100%, $padding: 0);
-                // content layout management
-                @include flex($direction: row, $align: center, $justify: flex-start);
-                // additional properties
-                flex-wrap: wrap;
-                > input {
-                    // additional properties
-                    width: calc(100% - 50px);
-                    color: white;
-                    // pseudo selectors
-                    &::placeholder {
-                        color: white;
-                    }
-                }
-                i {
-                    // additional properties
-                    color: white;
-                }
-            }
-            // tags list
-            > ul {
-                // box properties
-                @include box($width: $tag_col_width * 3, $padding: 0);
-                // content layout management
-                @include flex($direction: row, $align: flex-start, $justify: flex-start);
-                // additional properties
-                flex-wrap: wrap;
-                list-style: none;
-                margin: 0px;
-                > li {    
-                    // box properties
-                    @include box($width: $tag_col_width, $height: 32.5px);
-                    // content layout management
-                    @include flex($align: flex-start);
-                    // font
-                    @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white)
-                }
-            }
-
-        }
-        
-        > div:nth-of-type(1) {
-            // box properties
-            @include box($backcolor: $color_search_1, $padding: 0);
-            // additional properties
-            margin-right: 20px;
-        }
-        
-        > div:nth-of-type(2) {
-            // box properties
-            @include box($backcolor: $color_search_2, $padding: 0);
-            // additional properties
-            margin-right: 20px;
-        }
-        
-        > div:nth-of-type(3) {
-            // box properties
-            @include box($backcolor: $color_search_3, $padding: 0);
-        }
-
-        /*
-        // tags selectors
-        > input, > span {
-            // additional properties
-            color: white;
-            &::placeholder {
-                color: white;
-            }
-        }
-        > input:nth-of-type(1), > span:nth-of-type(1) {
-            // additional properties
-            background-color: $color_search_1;
-        }
-        > span:nth-of-type(1) {
-            // additional properties
-            margin-right: 20px;
-        }
-        > input:nth-of-type(2), > span:nth-of-type(2) {
-            // additional properties
-            background-color: $color_search_2;
-        }
-        > span:nth-of-type(2) {
-            // additional properties
-            margin-right: 20px;            
-        }
-        > input:nth-of-type(3), > span:nth-of-type(3) {
-            // additional properties
-            background-color: $color_search_3;
-        }
-        */
-    }
-
-
-
-
-    > div.recipes {
-        // content layout management
-        @include flex($direction: row, $align: center, $justify: flex-start);
-        // additional properties
-        width: 100%;
-        flex-wrap: wrap;
-        // recipes thumbnails
-        > article {
-            // box properties
-            @include box($width: 475px, $padding: unset);
-            // additional properties
-            margin: 25px calc((100% - 1425px) / 2) 25px 0;
-            overflow: hidden;
-            // recipe image
-            > div:nth-of-type(1) {
-                // box properties
-                @include box($width: 475px, $height: 225px, $backcolor: $color_recipe_1, $radius: 0px);
-            }
-            // recipe details
-            > div:nth-of-type(2) {
-                // box properties
-                @include box($width: 100%, $height: 235px, $padding: 20px 20px, $backcolor: $color_recipe_2, $radius: 0px);
-                // content layout management
-                @include flex($direction: row);
-                // additional properties
-                flex-wrap: wrap;
-                align-content: space-around;
-                // common properties
-                > * {
-                    // box properties
-                    @include box($padding: 0px);
-                    // content layout management
-                    @include flex($align: flex-start);
-                }
-                > h2 {
-                    // overridings
-                    width: 75%;
-                    height: 45px;
-                    // additional properties
-                    margin-block: unset;
-                    margin-inline: unset;
-                }
-                > i {
-                    // overridings
-                    width: 5%;
-                    height: 45px;
-                }
-                > span:nth-of-type(1) {
-                    // overridings
-                    width: 20%;
-                    height: 45px;
-                    align-items: center;
-                }
-                > div:nth-of-type(1) {
-                    // overridings
-                    width: 50%;
-                    height: 175px;
-                    justify-content: flex-start;
-                }
-                > span:nth-of-type(2) {
-                    // overridings
-                    width: 50%;
-                    height: 175px;      
-                    justify-content: flex-start;     
-                }
-            }
-        }
-        // keep the thumbnail layout left aligned whatsoever
-        > article:nth-of-type(3n) {
-            margin-right: 0;
-        }
-
     }
 }

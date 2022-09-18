@@ -1,43 +1,52 @@
 /* eslint-disable no-invalid-this */
 
 // import modules
-import {inputFactory} from "../factories/input.js";
 import {searchEngine} from "../data/search.js";
+import {inputFactory} from "../factories/input.js";
+import {resultsFactory} from "../factories/results.js";
 
 try {
 
     const
-        // create DOM element for text search
-        textSearch = inputFactory(`search`, `recipes-search`, `Rechercher une recette`, `magnifying-glass`);
+        [ textSearch, ingredientsSearch, appliancesSearch, ustensilsSearch, recipeFinder, recipesList ] = [
+            // create DOM element for text search
+            inputFactory(`search`, `recipes-search`, `Rechercher une recette`),
+            // create DOM elements for tag searches
+            inputFactory(`tag`, `ingredients-tag`, `Ingédients`),
+            inputFactory(`tag`, `appliances-tag`, `Appareils`),
+            inputFactory(`tag`, `ustensils-tag`, `Ustensiles`),
+            // create new search engine
+            new searchEngine(`recipes finder`, function(e) {
+                // start recipes search
+                this.find(e);
+            }),
+            resultsFactory(`recipes`, function({event, recipes}) {
+                // if current element is relevant to notification
+                if (event === `recipesListUpdate`)
+                    // refresh recipes list
+                    this.refresh(recipes);
+            })
+        ];
 
-    /*
-        // create DOM elements for tag searches
-        ingredientsSearch = inputFactory(`tag`, `ingredients-tag`, `Ingédients`, `chevron-down`),
-        appliancesSearch = inputFactory(`tag`, `appliances-tag`, `Appareils`, `chevron-down`),
-        ustensilsSearch = inputFactory(`tag`, `ustensils-tag`, `Ustensiles`, `chevron-down`),
-        // create new search engine
-        recipeFinder = new searchEngine(`recipes finder`, function(e) {
-            // write notified event to console
-            this.writeToconsole(e);
-            // notify engines observer (TBC)
-            this.notify(e);
-        });
+    // recipes list subscribes to search engine ...
+    recipeFinder.subscribe(recipesList);
+
+    // store recipes list DOM element, set id
+    recipesList.element = recipesList.get(`recipes-list`);
 
     // search engine subscribes to inputs ...
-    textSearch.subscribe(recipeFinder);
-    ingredientsSearch.subscribe(recipeFinder);
-    appliancesSearch.subscribe(recipeFinder);
-    ustensilsSearch.subscribe(recipeFinder);
-    */
+    [ textSearch, ingredientsSearch, appliancesSearch, ustensilsSearch ]
+        .forEach(x => x.subscribe(recipeFinder));
 
     // append text search
     document.querySelector(`.tags`).before(...textSearch.get());
 
-    /*
     // append tag search
-    [ ustensilsSearch, appliancesSearch, ingredientsSearch ]
-        .forEach(x => document.querySelector(`.tags`).append(...x.get()));
-    */
+    [ ingredientsSearch, appliancesSearch, ustensilsSearch ]
+        .forEach(x => document.querySelector(`.tags`).append(x.get(recipeFinder)));
+
+    // append recipes list
+    document.querySelector(`.tags`).after(recipesList.element);
 
 } catch (err) {
     // write to stderr
