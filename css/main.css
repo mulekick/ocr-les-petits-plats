@@ -154,6 +154,9 @@ div.tags > div:nth-of-type(3) {
   color: white;
   font-family: "Roboto", sans-serif;
 }
+.taglist > li:hover {
+  cursor: pointer;
+}
 
 .taglist-cols-1 {
   width: 250px;

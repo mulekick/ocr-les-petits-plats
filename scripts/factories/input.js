@@ -40,7 +40,7 @@ const
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
-                                event: `textSearchValueChange`,
+                                event: `textSearchInputChange`,
                                 element: e.target
                             });
                         }
@@ -82,7 +82,7 @@ const
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
-                                event: `tagValueChange`,
+                                event: `tagInputChange`,
                                 element: e.target
                             });
                         }
@@ -126,6 +126,33 @@ const
         }
 
     },
+    // constructor is not specified since it would be empty
+    selectedTagsInput = class extends observeeInput {
+        // use a factory function to override the superclass method
+        get() {
+            const
+                // specify new DOM elements to create
+                [ ul ] = [ {
+                    tag: `ul`,
+                    attributes: [ {attr: `id`, value: this.id} ],
+                    // notify observers
+                    listeners: [ {
+                        event: `click`,
+                        callback: function(e) {
+                            // listener will be bound to searchInput instance during DOM element creation
+                            this.notify({
+                                event: `selectedTagsInputChange`,
+                                element: e.target
+                            });
+                        }
+                    } ]
+                // use an arrow function expression so 'this' points to the parent scope
+                } ].map(x => this.create(x));
+
+            // return div1
+            return ul;
+        }
+    },
     // actual input factory
     inputFactory = function(type, id, placeholder, icon) {
         // select the instance to create
@@ -134,6 +161,8 @@ const
             return new searchInput(id, placeholder, icon);
         case `tag` :
             return new tagInput(id, placeholder, icon);
+        case `selected` :
+            return new selectedTagsInput(id);
         default :
             throw new TypeError(`invalid values provided, photographer factory can't return an object`);
         }

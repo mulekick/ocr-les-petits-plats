@@ -8,9 +8,11 @@ import {resultsFactory} from "../factories/results.js";
 try {
 
     const
-        [ textSearch, ingredientsSearch, appliancesSearch, ustensilsSearch, recipeFinder, recipesList ] = [
+        [ textSearch, selectedTags, ingredientsSearch, appliancesSearch, ustensilsSearch, recipeFinder, recipesList ] = [
             // create DOM element for text search
             inputFactory(`search`, `recipes-search`, `Rechercher une recette`),
+            // create DOM element for selected tags
+            inputFactory(`selected`, `selected-tags-list`),
             // create DOM elements for tag searches
             inputFactory(`tag`, `ingredients-tag`, `Ingédients`),
             inputFactory(`tag`, `appliances-tag`, `Appareils`),
@@ -35,11 +37,11 @@ try {
     recipesList.element = recipesList.get(`recipes-list`);
 
     // search engine subscribes to inputs ...
-    [ textSearch, ingredientsSearch, appliancesSearch, ustensilsSearch ]
+    [ textSearch, selectedTags, ingredientsSearch, appliancesSearch, ustensilsSearch ]
         .forEach(x => x.subscribe(recipeFinder));
 
     // append text search
-    document.querySelector(`.tags`).before(...textSearch.get());
+    document.querySelector(`.tags`).before(...textSearch.get(), selectedTags.get());
 
     // append tag search
     [ ingredientsSearch, appliancesSearch, ustensilsSearch ]

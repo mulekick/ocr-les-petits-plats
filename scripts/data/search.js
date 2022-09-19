@@ -57,34 +57,52 @@ const
 
         // search criteria update notification
         find({event, element}) {
+            // eslint compliant
+            let match = null;
             // execute on observee's notifications
             switch (event) {
-            case `textSearchValueChange` :
+            case `textSearchInputChange` :
+                // reset results and tags if input length is less than 3
                 console.log(`${ this.name }: search text changed to ${ element.value } in ${ element.id }`);
                 // notify recipes list
                 this.notify({
                     event: `recipesListUpdate`,
-                    recipes: shuffle(this.recipes)
+                    recipes: element.value.length < 3 ? null : shuffle(this.recipes)
                 });
                 // notify tags lists
                 this.notify({
                     event: `tagListUpdate`,
                     id: `ingredients-tag-list`,
-                    tags: shuffle(this.ingredients)
+                    tags: element.value.length < 3 ? null : shuffle(this.ingredients)
                 });
                 this.notify({
                     event: `tagListUpdate`,
                     id: `appliances-tag-list`,
-                    tags: shuffle(this.appliances)
+                    tags: element.value.length < 3 ? null : shuffle(this.appliances)
                 });
                 this.notify({
                     event: `tagListUpdate`,
                     id: `ustensils-tag-list`,
-                    tags: shuffle(this.ustensils)
+                    tags: element.value.length < 3 ? null : shuffle(this.ustensils)
                 });
                 break;
-            case `tagValueChange` :
+            case `tagInputChange` :
+                // filter tags matching input
                 console.log(`${ this.name }: search tag changed to ${ element.value } in ${ element.id }`);
+                // test tag list id
+                match = element.id.match(/(?<list>\w+)-tag/u);
+                // throw error if not found
+                if (match === null)
+                    throw new Error(`${ this.name }: invalid tag filter id`);
+                // notify observer div with new list
+                this.notify({
+                    event: `tagListUpdate`,
+                    id: `${ element.id }-list`,
+                    tags: this[match.pop()].filter(x => new RegExp(element.value, `gui`).test(x))
+                });
+                break;
+            case `selectedTagsInputChange` :
+                console.log(`${ this.name }: selected tags list changed in ${ element.id }`);
                 break;
             default :
                 throw new Error(`${ this.name }: unhandled notification type`);

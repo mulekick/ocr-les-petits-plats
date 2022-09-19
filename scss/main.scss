@@ -117,7 +117,11 @@ div.tags {
         // content layout management
         @include flex($align: flex-start);
         // font
-        @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white)
+        @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white);
+        // additional properties
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 

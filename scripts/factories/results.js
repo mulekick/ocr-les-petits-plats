@@ -51,7 +51,7 @@ const
             this.element.replaceChildren();
             this.element.classList.remove(`taglist-cols-1`, `taglist-cols-2`, `taglist-cols-3`);
             // if there are tags to display ...
-            if (tags.length) {
+            if (tags && tags.length) {
                 const
                     // limit list to 30 tags max
                     list = tags.slice(0, 30),
@@ -62,7 +62,22 @@ const
                 // use an arrow function expression so 'this' points to the parent scope
                 this.element.append(...list.map(tag => this.create({
                     tag: `li`,
-                    properties: [ {prop: `textContent`, value: tag} ]
+                    properties: [ {prop: `textContent`, value: tag} ],
+                    listeners: [ {
+                        event: `click`,
+                        callback: e => {
+
+                            // does not allow the removal of tags ...
+
+                            // retrieve selected tags list
+                            const selectedTags = e.target.parentElement.parentElement.parentElement.previousElementSibling;
+                            // copy and add current element to it
+                            selectedTags.append(e.target.cloneNode(true));
+                            // dispatch input event to it to trigger the update
+                            selectedTags.dispatchEvent(new Event(`click`));
+
+                        }
+                    } ]
                 })));
             }
         }
@@ -88,7 +103,7 @@ const
             // clear old list
             this.element.replaceChildren();
             // if there are recipes to display ...
-            if (recipes.length) {
+            if (recipes && recipes.length) {
                 // use an arrow function expression so 'this' points to the parent scope
                 recipes.forEach(r => {
                     const
