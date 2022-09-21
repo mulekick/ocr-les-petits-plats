@@ -65,17 +65,42 @@ const
                     properties: [ {prop: `textContent`, value: tag} ],
                     listeners: [ {
                         event: `click`,
+                        // we're not using the observer pattern on the tags selection list and
+                        // the selected tags list since it is assessed that the only observer
+                        // and observee interactions occur between input controls, search engine
+                        // and results display controls
                         callback: e => {
-
-                            // does not allow the removal of tags ...
-
-                            // retrieve selected tags list
-                            const selectedTags = e.target.parentElement.parentElement.parentElement.previousElementSibling;
-                            // copy and add current element to it
-                            selectedTags.append(e.target.cloneNode(true));
+                            const
+                                // retrieve selected tags list
+                                selectedTags = e.target.parentElement.parentElement.parentElement.previousElementSibling,
+                                // clone current node
+                                newTag = e.target.cloneNode(true),
+                                // create close icon node
+                                closeTag = this.create({
+                                    tag: `i`,
+                                    attributes: [ {attr: `class`, value: `fa-solid fa-rectangle-xmark`} ],
+                                    // notify observers
+                                    listeners: [ {
+                                        event: `click`,
+                                        callback: function(ev) {
+                                            console.log(`removing tag ${ ev.target.parentElement.textContent }`);
+                                            // remove tag from DOM
+                                            ev.target.parentElement.remove();
+                                            // dispatch element on parent div
+                                            this.dispatchEvent(new Event(`wheel`));
+                                        // bind the listener to the selected tags so we can
+                                        // dispatch an event on it after the tag is removed
+                                        }.bind(selectedTags)
+                                    } ]
+                                });
+                            // add custom class to cloned node
+                            newTag.classList.add(`${ e.target.parentElement.id }-selected`);
+                            // append icon to element
+                            newTag.append(closeTag);
+                            // append new tag to list
+                            selectedTags.append(newTag);
                             // dispatch input event to it to trigger the update
-                            selectedTags.dispatchEvent(new Event(`click`));
-
+                            selectedTags.dispatchEvent(new Event(`wheel`));
                         }
                     } ]
                 })));

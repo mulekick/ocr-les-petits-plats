@@ -35,7 +35,6 @@ const
                     attributes: [ {attr: `type`, value: `text`}, {attr: `id`, value: this.id}, {attr: `placeholder`, value: this.placeholder} ],
                     // notify observers
                     listeners: [ {
-                        // event: `change`,
                         event: `input`,
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
@@ -77,7 +76,6 @@ const
                     attributes: [ {attr: `type`, value: `text`}, {attr: `id`, value: this.id}, {attr: `placeholder`, value: this.placeholder} ],
                     // notify observers
                     listeners: [ {
-                        // event: `change`,
                         event: `input`,
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
@@ -134,10 +132,10 @@ const
                 // specify new DOM elements to create
                 [ ul ] = [ {
                     tag: `ul`,
-                    attributes: [ {attr: `id`, value: this.id} ],
+                    attributes: [ {attr: `id`, value: this.id}, {attr: `class`, value: `selectedTagList`} ],
                     // notify observers
                     listeners: [ {
-                        event: `click`,
+                        event: `wheel`,
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({

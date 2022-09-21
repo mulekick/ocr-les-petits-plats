@@ -53,6 +53,8 @@ const
                 `louche`,
                 `râpe à fromage`
             ];
+            // store current selected tags
+            this.tags = null;
         }
 
         // search criteria update notification
@@ -102,7 +104,9 @@ const
                 });
                 break;
             case `selectedTagsInputChange` :
-                console.log(`${ this.name }: selected tags list changed in ${ element.id }`);
+                // update current selected tags
+                this.tags = Array.from(element.children).map(x => x.textContent);
+                console.log(`${ this.name }: selected tags list changed to ${ this.tags.join(`, `) } in ${ element.id }`);
                 break;
             default :
                 throw new Error(`${ this.name }: unhandled notification type`);

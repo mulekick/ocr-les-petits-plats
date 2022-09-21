@@ -52,7 +52,7 @@ div.tags {
     @include flex($direction: row, $align: flex-start, $justify: flex-start);
     // additional properties
     flex-wrap: wrap;
-    margin: 25px 0 0 0;
+    margin: 5px 0 0 0;
     // wrapper div
     > div {
         // positioning
@@ -139,6 +139,50 @@ div.tags {
 .taglist-cols-3 {
     // additional properties
     width: $tag_col_width * 3;
+}
+
+.selectedTagList {
+    // box properties
+    @include box($width: 100%, $padding: 0);
+    // content layout management
+    @include flex($direction: row, $justify: flex-start);
+    // additional properties
+    flex-wrap: wrap;
+    list-style: none;
+    color: white;
+    margin-bottom: 0;
+
+    > li {  
+        // box properties
+        @include box($height: 35px);
+        // content layout management
+        @include flex($direction: row, $justify: flex-start);
+        // additional properties
+        margin: 10px 15px;
+        // flex-wrap: nowrap;
+        > i {
+            // additional properties
+            margin-left: 10px;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
+
+
+li.ingredients-tag-list-selected {
+    // additional properties
+    background-color: $color_search_1;
+}
+
+li.appliances-tag-list-selected {
+    // additional properties
+    background-color: $color_search_2;
+}
+
+li.ustensils-tag-list-selected {
+    // additional properties
+    background-color: $color_search_3;
 }
 
 // ------- RECIPES LIST ---------

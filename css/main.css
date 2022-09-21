@@ -63,7 +63,7 @@ div.tags {
   align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 25px 0 0 0;
+  margin: 5px 0 0 0;
 }
 div.tags > div {
   position: relative;
@@ -168,6 +168,53 @@ div.tags > div:nth-of-type(3) {
 
 .taglist-cols-3 {
   width: 480px;
+}
+
+.selectedTagList {
+  width: 100%;
+  height: initial;
+  padding: 0;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  list-style: none;
+  color: white;
+  margin-bottom: 0;
+}
+.selectedTagList > li {
+  width: initial;
+  height: 35px;
+  padding: 10px 10px;
+  background-color: initial;
+  border-radius: 7.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px 15px;
+}
+.selectedTagList > li > i {
+  margin-left: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+li.ingredients-tag-list-selected {
+  background-color: #3481f5;
+}
+
+li.appliances-tag-list-selected {
+  background-color: #68d9a5;
+}
+
+li.ustensils-tag-list-selected {
+  background-color: #eb6552;
 }
 
 div.recipes {
