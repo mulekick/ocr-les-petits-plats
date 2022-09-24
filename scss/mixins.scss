@@ -27,3 +27,22 @@
     color: $color;
     font-family: "Roboto", sans-serif;
 }
+
+
+// tags list open / close animation
+@mixin spin($duration: 0.25s, $delay: 0s, $start, $finish, $direction: normal) {
+
+    @keyframes spin {
+        from {
+            transform: rotate($start);
+        }
+        
+        to {
+            transform: rotate($finish);
+        }
+    }
+    
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration linear $delay 1 $direction forwards running spin;
+    
+}

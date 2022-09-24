@@ -37,7 +37,7 @@ const
                 // specify new DOM elements to create
                 [ ul ] = [ {
                     tag: `ul`,
-                    attributes: [ {attr: `id`, value: id}, {attr: `class`, value: `taglist`} ]
+                    attributes: [ {attr: `id`, value: id}, {attr: `class`, value: `display-none`} ]
                 // use an arrow function expression so 'this' points to the parent scope
                 } ].map(x => this.create(x));
 

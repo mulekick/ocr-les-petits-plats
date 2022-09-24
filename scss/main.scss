@@ -7,10 +7,15 @@
 
 // ======= GENERAL STYLES =======
 
+// ---------- DISPLAY -----------
+.display-none {
+    display: none;
+}
+
 // ----------- SPANS ------------
 
 span.large, h2, i {
-    @include span($margin: 5px 0 5px 0, $size: 20px, $weight: 500)
+    @include span($margin: 5px 0 5px 0, $size: 20px, $weight: 500);
 }
 
 span.small {
@@ -22,6 +27,20 @@ span.icon {
     @include box($width: 50px, $height: 50px, $radius: 0 $radius_default $radius_default 0);
     // content layout management
     @include flex;
+        // additional properties
+        > i.select-icon:hover {
+            cursor: pointer;
+        }
+}
+
+.list-open {
+    // rotate chevron-down icon from 0 to 180°, clockwise
+    @include spin($start: 0deg, $finish: 180deg, $direction: reverse);
+}
+
+.list-close {
+    // rotate chevron-down icon from 180° to 0, counterclockwise
+    @include spin($start: 180deg, $finish: 0deg, $direction: normal);
 }
 
 // ---------- INPUTS ------------

@@ -1,6 +1,7 @@
 /* eslint-disable no-invalid-this */
 
 // import modules
+import {EVENT_RECIPES_UPDATE} from "../utils/config.js";
 import {searchEngine} from "../data/search.js";
 import {inputFactory} from "../factories/input.js";
 import {resultsFactory} from "../factories/results.js";
@@ -24,7 +25,7 @@ try {
             }),
             resultsFactory(`recipes`, function({event, recipes}) {
                 // if current element is relevant to notification
-                if (event === `recipesListUpdate`)
+                if (event === EVENT_RECIPES_UPDATE)
                     // refresh recipes list
                     this.refresh(recipes);
             })
@@ -49,6 +50,9 @@ try {
 
     // append recipes list
     document.querySelector(`.tags`).after(recipesList.element);
+
+    // dispatch element on text search to display all the recipes
+    // document.querySelector(`#recipes-search`).dispatchEvent(new Event(`input`));
 
 } catch (err) {
     // write to stderr

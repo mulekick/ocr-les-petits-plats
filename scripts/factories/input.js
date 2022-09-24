@@ -5,6 +5,7 @@
 // import modules
 import {domElementCreator} from "../utils/domElementCreator.js";
 import {observeeMixin} from "../utils/classMixins.js";
+import {EVENT_TEXT_SEARCH, EVENT_TAGS_SEARCH, EVENT_TAGS_LIST_UPDATE, EVENT_TAGS_SELECTED} from "../utils/config.js";
 import {resultsFactory} from "./results.js";
 
 const
@@ -39,7 +40,7 @@ const
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
-                                event: `textSearchInputChange`,
+                                event: EVENT_TEXT_SEARCH,
                                 element: e.target
                             });
                         }
@@ -80,7 +81,7 @@ const
                         callback: function(e) {
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
-                                event: `tagInputChange`,
+                                event: EVENT_TAGS_SEARCH,
                                 element: e.target
                             });
                         }
@@ -90,13 +91,34 @@ const
                     attributes: [ {attr: `class`, value: `icon`} ]
                 }, {
                     tag: `i`,
-                    attributes: [ {attr: `class`, value: `fa-solid fa-chevron-down`} ]
+                    attributes: [ {attr: `class`, value: `fa-solid fa-chevron-down select-icon`} ],
+                    // managge icon animation
+                    listeners: [ {
+                        event: `click`,
+                        callback: e => {
+                            const
+                                // retrieve tags list
+                                t = e.target.parentElement.parentElement.nextElementSibling;
+                            // toggle tags list styles
+                            [ `taglist`, `display-none` ].forEach(x => t.classList.toggle(x));
+                            // remove animations, recompute styles and repaint document
+                            e.target.classList.remove(`list-open`, `list-close`);
+                            // first callback is executed before repaint ...
+                            requestAnimationFrame(() => {
+                                // second callback is executed after repaint, styles have been recomputed
+                                requestAnimationFrame(() => {
+                                    // add animation styles again so they run on next repaint
+                                    e.target.classList.add(t.classList.contains(`taglist`) ? `list-open` : `list-close`);
+                                });
+                            });
+                        }
+                    } ]
                 // use an arrow function expression so 'this' points to the parent scope
                 } ].map(x => this.create(x)),
                 // create tags list
                 tagList = new resultsFactory(`tag`, function({event, id, tags}) {
                     // if current element is relevant to notification
-                    if (event === `tagListUpdate` &&  id === this.element.id)
+                    if (event === EVENT_TAGS_LIST_UPDATE &&  id === this.element.id)
                         // refresh tags list
                         this.refresh(tags);
                 });
@@ -137,9 +159,10 @@ const
                     listeners: [ {
                         event: `wheel`,
                         callback: function(e) {
+                            // !!! REMOVE DUPLICATE TAGS !!!
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
-                                event: `selectedTagsInputChange`,
+                                event: EVENT_TAGS_SELECTED,
                                 element: e.target
                             });
                         }
