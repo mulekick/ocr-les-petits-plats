@@ -101,13 +101,15 @@ const
                                 t = e.target.parentElement.parentElement.nextElementSibling;
                             // toggle tags list styles
                             [ `taglist`, `display-none` ].forEach(x => t.classList.toggle(x));
-                            // remove animations, recompute styles and repaint document
+                            // remove animations styles
                             e.target.classList.remove(`list-open`, `list-close`);
-                            // first callback is executed before repaint ...
+                            // wait for the first callback to execute for the repaint
+                            // to occur so the animations disappear from the document
                             requestAnimationFrame(() => {
-                                // second callback is executed after repaint, styles have been recomputed
+                                // animations have disappeared, the next callback
+                                // will occur just before the next repaint
                                 requestAnimationFrame(() => {
-                                    // add animation styles again so they run on next repaint
+                                    // so we add animation styles there so they reappear on next repaint
                                     e.target.classList.add(t.classList.contains(`taglist`) ? `list-open` : `list-close`);
                                 });
                             });
@@ -159,7 +161,6 @@ const
                     listeners: [ {
                         event: `wheel`,
                         callback: function(e) {
-                            // !!! REMOVE DUPLICATE TAGS !!!
                             // listener will be bound to searchInput instance during DOM element creation
                             this.notify({
                                 event: EVENT_TAGS_SELECTED,

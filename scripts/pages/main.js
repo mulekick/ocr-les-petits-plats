@@ -10,19 +10,29 @@ try {
 
     const
         [ textSearch, selectedTags, ingredientsSearch, appliancesSearch, ustensilsSearch, recipeFinder, recipesList ] = [
+
+
             // create DOM element for text search
             inputFactory(`search`, `recipes-search`, `Rechercher une recette`),
+
+
             // create DOM element for selected tags
             inputFactory(`selected`, `selected-tags-list`),
+
+
             // create DOM elements for tag searches
             inputFactory(`tag`, `ingredients-tag`, `Ingédients`),
             inputFactory(`tag`, `appliances-tag`, `Appareils`),
             inputFactory(`tag`, `ustensils-tag`, `Ustensiles`),
+
+
             // create new search engine
             new searchEngine(`recipes finder`, function(e) {
                 // start recipes search
                 this.find(e);
             }),
+
+
             resultsFactory(`recipes`, function({event, recipes}) {
                 // if current element is relevant to notification
                 if (event === EVENT_RECIPES_UPDATE)
@@ -52,7 +62,7 @@ try {
     document.querySelector(`.tags`).after(recipesList.element);
 
     // dispatch element on text search to display all the recipes
-    // document.querySelector(`#recipes-search`).dispatchEvent(new Event(`input`));
+    document.querySelector(`#recipes-search`).dispatchEvent(new Event(`input`));
 
 } catch (err) {
     // write to stderr

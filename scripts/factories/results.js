@@ -72,7 +72,13 @@ const
                         callback: e => {
                             const
                                 // retrieve selected tags list
-                                selectedTags = e.target.parentElement.parentElement.parentElement.previousElementSibling,
+                                selectedTags = e.target.parentElement.parentElement.parentElement.previousElementSibling;
+
+                            // do not add duplicate tags
+                            if (Array.from(selectedTags.children).some(x => x.textContent === e.target.textContent))
+                                return;
+
+                            const
                                 // clone current node
                                 newTag = e.target.cloneNode(true),
                                 // create close icon node
@@ -191,6 +197,24 @@ const
                     // append article to recipes list
                     this.element.append(article);
                 });
+            // else, create a span with 'no results" ...
+            } else {
+                const
+                    // specify new DOM elements to create
+                    [ span, b ] = [ {
+                        tag: `span`,
+                        attributes: [ {attr: `class`, value: `large`} ]
+                    }, {
+                        tag: `b`,
+                        properties: [ {prop: `textContent`, value: `Aucune recette ne correspond à votre critère ... vous pouvez chercher "tarte aux pommes", "poisson", etc ...`} ]
+                    // use an arrow function expression so 'this' points to the parent scope
+                    } ].map(x => this.create(x));
+
+                // append b to span
+                span.append(b);
+
+                // append span to recipes list
+                this.element.append(span);
             }
         }
     },

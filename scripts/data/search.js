@@ -8,7 +8,7 @@ const
     search = class {
         // constructor
         constructor(name) {
-            // store the logger name
+            // store engine name
             this.name = name;
             // store current recipes
             this.recipes = [];
@@ -17,29 +17,33 @@ const
             this.appliances = [];
             this.ustensils = [];
             // store current search term
-            this.searchTerm = null;
+            this.searchTerm = ``;
             // store current selected tags
-            this.tags = null;
+            this.tags = [];
         }
 
         parse() {
             // reset engine properties
             for (const p of [ `recipes`, `ingredients`, `appliances`, `ustensils` ])
                 this[p].splice(0, this[p].length);
+
+            const
+                // create regex from search term
+                r = new RegExp(`^.*${ this.searchTerm }.*$`, `ui`);
+
             // parse recipes for search terms in name, ingredients, description
             for (const recipe of recipes) {
                 const
                     // extract properties
                     {name, ingredients, description, appliance, ustensils} = recipe;
 
-                // test properties against selected tags using strict equality
-                if (this.tags instanceof Array)
-                    if (!this.tags.every(x => ingredients.map(y => y[`ingredient`]).includes(x) || appliance === x || ustensils.includes(x)))
-                        // at least one tag is nowhere to be found in the recipe, skip
-                        continue;
+                // test properties against selected tags using strict equality (Array.every returns true when passed an empty array)
+                if (!this.tags.every(x => ingredients.map(y => y[`ingredient`]).includes(x) || appliance === x || ustensils.includes(x)))
+                    // at least one tag is nowhere to be found in the recipe, skip
+                    continue;
 
-                // test properties against search term using regexp
-                if (this.searchTerm.test(name) || this.searchTerm.test(description) || ingredients.some(x => this.searchTerm.test(x[`ingredient`]))) {
+                // if search term length exceeds 3, test properties against it using regexp, otherwise recipe is good to go
+                if (this.searchTerm.length < 3 || r.test(name) || r.test(description) || ingredients.some(x => r.test(x[`ingredient`]))) {
                     // store recipe
                     this.recipes.push(recipe);
                     // store ingredients
@@ -51,9 +55,8 @@ const
                 }
 
                 // remove duplicate tags from lists (we assess that recipes contain no duplicates ...)
-                this.ingredients = this.ingredients.filter((x, i, a) => a.indexOf(x) === i);
-                this.appliances = this.appliances.filter((x, i, a) => a.indexOf(x) === i);
-                this.ustensils = this.ustensils.filter((x, i, a) => a.indexOf(x) === i);
+                [ `ingredients`, `appliances`, `ustensils` ]
+                    .forEach(p => (this[p] = this[p].filter((x, i, a) => a.indexOf(x) === i)));
             }
         }
 
@@ -65,30 +68,30 @@ const
             switch (event) {
             case EVENT_TEXT_SEARCH :
                 console.log(`${ this.name }: search text changed to ${ element.value } in ${ element.id }`);
-                // update search term
-                this.searchTerm = new RegExp(`^.*${ element.value }.*$`, `ui`);
+                // store search term
+                this.searchTerm = element.value;
                 // parse recipes
                 this.parse();
                 // notify recipes list
                 this.notify({
                     event: EVENT_RECIPES_UPDATE,
-                    recipes: element.value.length < 3 ? null : this.recipes
+                    recipes: this.recipes
                 });
                 // notify tags lists
                 this.notify({
                     event: EVENT_TAGS_LIST_UPDATE,
                     id: `ingredients-tag-list`,
-                    tags: element.value.length < 3 ? null : this.ingredients
+                    tags: this.ingredients
                 });
                 this.notify({
                     event: EVENT_TAGS_LIST_UPDATE,
                     id: `appliances-tag-list`,
-                    tags: element.value.length < 3 ? null : this.appliances
+                    tags: this.appliances
                 });
                 this.notify({
                     event: EVENT_TAGS_LIST_UPDATE,
                     id: `ustensils-tag-list`,
-                    tags: element.value.length < 3 ? null : this.ustensils
+                    tags: this.ustensils
                 });
                 break;
             case EVENT_TAGS_SEARCH :

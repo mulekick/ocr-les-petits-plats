@@ -299,6 +299,7 @@ div.recipes > article > div:nth-of-type(2) > * {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+  overflow: hidden;
 }
 div.recipes > article > div:nth-of-type(2) > h2 {
   width: 75%;
