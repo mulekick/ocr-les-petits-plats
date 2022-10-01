@@ -161,15 +161,16 @@ div.tags > div:nth-of-type(3) {
   border-radius: 7.5px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  max-height: 325px;
   flex-wrap: wrap;
   list-style: none;
   margin: 0px;
 }
 .taglist > li {
-  width: 160px;
+  width: 180px;
   height: 32.5px;
   padding: 10px 10px;
   background-color: initial;
@@ -194,11 +195,11 @@ div.tags > div:nth-of-type(3) {
 }
 
 .taglist-cols-2 {
-  width: 320px;
+  width: 360px;
 }
 
 .taglist-cols-3 {
-  width: 480px;
+  width: 540px;
 }
 
 .selectedTagList {
@@ -343,6 +344,8 @@ header {
   align-items: center;
   justify-content: space-around;
   padding: 10px 10px;
+  margin: 0 calc((100% - 1520px) / 2);
+  width: 1520px;
 }
 header > img {
   height: 100px;
@@ -354,8 +357,8 @@ main {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 0 100px;
-  min-width: 1520px;
+  margin: 0 calc((100% - 1520px) / 2);
+  width: 1520px;
 }
 main > input:first-of-type {
   width: calc(100% - 50px);

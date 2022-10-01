@@ -125,8 +125,9 @@ div.tags {
     // box properties
     @include box($padding: 0);
     // content layout management
-    @include flex($direction: row, $align: flex-start, $justify: flex-start);
+    @include flex($align: flex-start, $justify: flex-start);
     // additional properties
+    max-height: 325px;
     flex-wrap: wrap;
     list-style: none;
     margin: 0px;
@@ -302,6 +303,10 @@ header {
     > img {
         height: 100px;
     }
+    // additional properties
+    margin: 0 calc((100% - 1520px) / 2);
+    // stop viewport shrinking
+    width: 1520px;
 }
 
 main {
@@ -309,9 +314,9 @@ main {
     @include flex($direction: row, $align: center, $justify: flex-start);
     // additional properties
     flex-wrap: wrap;
-    margin: 0 100px;
+    margin: 0 calc((100% - 1520px) / 2);
     // stop viewport shrinking
-    min-width: 1520px;
+    width: 1520px;
 
     // text search field
     > input:first-of-type {

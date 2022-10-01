@@ -42,6 +42,8 @@ const
                     // at least one tag is nowhere to be found in the recipe, skip
                     continue;
 
+                // ==== MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : FUNCTIONAL PROGRAMMING / REGEXP ====
+
                 // if search term length exceeds 3, test properties against it using regexp, otherwise recipe is good to go
                 if (this.searchTerm.length < 3 || r.test(name) || r.test(description) || ingredients.some(x => r.test(x[`ingredient`]))) {
                     // store recipe
@@ -54,9 +56,11 @@ const
                     this.ustensils.push(...ustensils);
                 }
 
+                // ==== MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : FUNCTIONAL PROGRAMMING / REGEXP ====
+
                 // remove duplicate tags from lists (we assess that recipes contain no duplicates ...)
                 [ `ingredients`, `appliances`, `ustensils` ]
-                    .forEach(p => (this[p] = this[p].filter((x, i, a) => a.indexOf(x) === i)));
+                    .forEach(p => (this[p] = this[p].filter((x, i, a) => a.indexOf(x) === i).sort()));
             }
         }
 

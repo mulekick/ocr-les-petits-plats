@@ -53,7 +53,7 @@ const
             // if there are tags to display ...
             if (tags && tags.length) {
                 const
-                    // limit list to 30 tags max
+                    // limit list to 30 tags max for readability
                     list = tags.slice(0, 30),
                     // manage display layout
                     cols = Math.floor((list.length - 1) / 10) + 1;
@@ -94,6 +94,11 @@ const
                                             ev.target.parentElement.remove();
                                             // dispatch element on parent div
                                             this.dispatchEvent(new Event(`wheel`));
+
+                                            // retrieve tags filter inputs
+                                            for (let x = this.nextElementSibling.firstElementChild; x instanceof Element; x = x.nextElementSibling)
+                                                // dispatch new event to trigger the update
+                                                x.firstElementChild.firstElementChild.dispatchEvent(new Event(`input`));
                                         // bind the listener to the selected tags so we can
                                         // dispatch an event on it after the tag is removed
                                         }.bind(selectedTags)
@@ -107,6 +112,10 @@ const
                             selectedTags.append(newTag);
                             // dispatch input event to it to trigger the update
                             selectedTags.dispatchEvent(new Event(`wheel`));
+                            // retrieve tags filter inputs
+                            for (let x = selectedTags.nextElementSibling.firstElementChild; x instanceof Element; x = x.nextElementSibling)
+                                // dispatch new event to trigger the update
+                                x.firstElementChild.firstElementChild.dispatchEvent(new Event(`input`));
                         }
                     } ]
                 })));
