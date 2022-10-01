@@ -27,10 +27,6 @@ const
             for (const p of [ `recipes`, `ingredients`, `appliances`, `ustensils` ])
                 this[p].splice(0, this[p].length);
 
-            const
-                // create regex from search term
-                r = new RegExp(`^.*${ this.searchTerm }.*$`, `ui`);
-
             // parse recipes for search terms in name, ingredients, description
             for (const recipe of recipes) {
                 const
@@ -42,21 +38,29 @@ const
                     // at least one tag is nowhere to be found in the recipe, skip
                     continue;
 
-                // ==== MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : FUNCTIONAL PROGRAMMING / REGEXP ====
+                // ========= MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : NATIVE LOOPS / INDEXOF ========
 
                 // if search term length exceeds 3, test properties against it using regexp, otherwise recipe is good to go
-                if (this.searchTerm.length < 3 || r.test(name) || r.test(description) || ingredients.some(x => r.test(x[`ingredient`]))) {
+                if (this.searchTerm.length < 3 || name.indexOf(this.searchTerm) >= 0 || description.indexOf(this.searchTerm) >= 0 || (a => {
+                    for (const x of a)
+                        // this points to parent lexical scope
+                        if (x[`ingredient`].indexOf(this.searchTerm) >= 0)
+                            return true;
+                    return false;
+                })(ingredients)) {
                     // store recipe
                     this.recipes.push(recipe);
-                    // store ingredients
-                    this.ingredients.push(...ingredients.map(x => x[`ingredient`]));
+                    for (const i of ingredients)
+                        // store ingredients
+                        this.ustensils.push(i[`ingredient`]);
                     // store appliances
                     this.appliances.push(appliance);
-                    // store ustensils
-                    this.ustensils.push(...ustensils);
+                    for (const u of ustensils)
+                        // store ustensils
+                        this.ustensils.push(u);
                 }
 
-                // ==== MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : FUNCTIONAL PROGRAMMING / REGEXP ====
+                // ========= MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : NATIVE LOOPS / INDEXOF ========
 
                 // remove duplicate tags from lists (we assess that recipes contain no duplicates ...)
                 [ `ingredients`, `appliances`, `ustensils` ]
