@@ -41,10 +41,10 @@ const
                 // ========= MATCH SEARCH TERM AGAINST LENGTH, RECIPE NAME, DESCRIPTION AND INGREDIENTS : NATIVE LOOPS / INDEXOF ========
 
                 // if search term length exceeds 3, test properties against it using regexp, otherwise recipe is good to go
-                if (this.searchTerm.length < 3 || name.indexOf(this.searchTerm) >= 0 || description.indexOf(this.searchTerm) >= 0 || (a => {
+                if (this.searchTerm.length < 3 || name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0 || description.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0 || (a => {
                     for (const x of a)
                         // this points to parent lexical scope
-                        if (x[`ingredient`].indexOf(this.searchTerm) >= 0)
+                        if (x[`ingredient`].toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0)
                             return true;
                     return false;
                 })(ingredients)) {
