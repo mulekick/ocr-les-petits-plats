@@ -52,7 +52,7 @@ const
                     this.recipes.push(recipe);
                     for (const i of ingredients)
                         // store ingredients
-                        this.ustensils.push(i[`ingredient`]);
+                        this.ingredients.push(i[`ingredient`]);
                     // store appliances
                     this.appliances.push(appliance);
                     for (const u of ustensils)
