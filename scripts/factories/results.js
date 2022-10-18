@@ -53,14 +53,12 @@ const
             // if there are tags to display ...
             if (tags && tags.length) {
                 const
-                    // limit list to 30 tags max for readability
-                    list = tags.slice(0, 30),
                     // manage display layout
-                    cols = Math.floor((list.length - 1) / 10) + 1;
+                    cols = Math.min(Math.floor((tags.length - 1) / 10) + 1, 3);
                 // populate new list
                 this.element.classList.add(`taglist-cols-${ String(cols) }`);
                 // use an arrow function expression so 'this' points to the parent scope
-                this.element.append(...list.map(tag => this.create({
+                this.element.append(...tags.map(tag => this.create({
                     tag: `li`,
                     properties: [ {prop: `textContent`, value: tag} ],
                     listeners: [ {

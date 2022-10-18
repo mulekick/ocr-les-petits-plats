@@ -60,7 +60,7 @@ const
 
                 // remove duplicate tags from lists (we assess that recipes contain no duplicates ...)
                 [ `ingredients`, `appliances`, `ustensils` ]
-                    .forEach(p => (this[p] = this[p].filter((x, i, a) => a.indexOf(x) === i).sort()));
+                    .forEach(p => (this[p] = this[p].filter((x, i, a) => a.indexOf(x) === i)));
             }
         }
 

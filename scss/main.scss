@@ -125,6 +125,62 @@ div.tags {
     // box properties
     @include box($padding: 0);
     // content layout management
+    @include flex($direction: row, $align: flex-start, $justify: flex-start);
+    // additional properties
+    max-height: 325px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0px;
+    > li {    
+        // box properties
+        @include box($width: $tag_col_width, $height: 32.5px);
+        // content layout management
+        @include flex($align: flex-start);
+        // font
+        @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white);
+        // additional properties
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.taglist-cols-1 {
+    // additional properties
+    // width: $tag_col_width * 1;
+    width: 250px;
+}
+
+.taglist-cols-2 {
+    // additional properties
+    width: $tag_col_width * 2;
+}
+
+.taglist-cols-3 {
+    // additional properties
+    width: calc($tag_col_width * 3 + 8px);
+    // cutom scrollbars
+    overflow-y: auto;
+    // gecko
+    scrollbar-width: thin;
+    scrollbar-color: #cecccd #f1eff0;
+    // blink / webkit
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: #f1eff0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #cecccd;
+    }
+}
+
+
+
+/*
+.taglist {
+    // box properties
+    @include box($padding: 0);
+    // content layout management
     @include flex($align: flex-start, $justify: flex-start);
     // additional properties
     max-height: 325px;
@@ -160,6 +216,10 @@ div.tags {
     // additional properties
     width: $tag_col_width * 3;
 }
+*/
+
+
+
 
 .selectedTagList {
     // box properties
