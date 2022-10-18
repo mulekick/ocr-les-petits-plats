@@ -174,53 +174,6 @@ div.tags {
     }
 }
 
-
-
-/*
-.taglist {
-    // box properties
-    @include box($padding: 0);
-    // content layout management
-    @include flex($align: flex-start, $justify: flex-start);
-    // additional properties
-    max-height: 325px;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0px;
-    > li {    
-        // box properties
-        @include box($width: $tag_col_width, $height: 32.5px);
-        // content layout management
-        @include flex($align: flex-start);
-        // font
-        @include span($margin: 0, $size: 15.5px, $weight: 300, $color: white);
-        // additional properties
-        &:hover {
-            cursor: pointer;
-        }
-    }
-}
-
-.taglist-cols-1 {
-    // additional properties
-    // width: $tag_col_width * 1;
-    width: 250px;
-}
-
-.taglist-cols-2 {
-    // additional properties
-    width: $tag_col_width * 2;
-}
-
-.taglist-cols-3 {
-    // additional properties
-    width: $tag_col_width * 3;
-}
-*/
-
-
-
-
 .selectedTagList {
     // box properties
     @include box($width: 100%, $padding: 0);
