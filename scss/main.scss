@@ -125,7 +125,7 @@ div.tags {
     // box properties
     @include box($padding: 0);
     // content layout management
-    @include flex($align: flex-start, $justify: flex-start);
+    @include flex($direction: row, $align: flex-start, $justify: flex-start);
     // additional properties
     max-height: 325px;
     flex-wrap: wrap;
@@ -158,7 +158,20 @@ div.tags {
 
 .taglist-cols-3 {
     // additional properties
-    width: $tag_col_width * 3;
+    width: calc($tag_col_width * 3 + 8px);
+    // cutom scrollbars
+    overflow-y: auto;
+    // gecko
+    scrollbar-width: thin;
+    scrollbar-color: #cecccd #f1eff0;
+    // blink / webkit
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: #f1eff0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #cecccd;
+    }
 }
 
 .selectedTagList {

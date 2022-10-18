@@ -161,7 +161,7 @@ div.tags > div:nth-of-type(3) {
   border-radius: 7.5px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   max-height: 325px;
@@ -199,7 +199,17 @@ div.tags > div:nth-of-type(3) {
 }
 
 .taglist-cols-3 {
-  width: 540px;
+  width: 548px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cecccd #f1eff0;
+}
+.taglist-cols-3::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f1eff0;
+}
+.taglist-cols-3::-webkit-scrollbar-thumb {
+  background-color: #cecccd;
 }
 
 .selectedTagList {
