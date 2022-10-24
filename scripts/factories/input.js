@@ -118,7 +118,7 @@ const
                 // use an arrow function expression so 'this' points to the parent scope
                 } ].map(x => this.create(x)),
                 // create tags list
-                tagList = new resultsFactory(`tag`, function({event, id, tags}) {
+                tagList = resultsFactory(`tag`, function({event, id, tags}) {
                     // if current element is relevant to notification
                     if (event === EVENT_TAGS_LIST_UPDATE &&  id === this.element.id)
                         // refresh tags list
